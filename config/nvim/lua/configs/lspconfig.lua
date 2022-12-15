@@ -17,6 +17,10 @@ for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, sign)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -76,6 +80,10 @@ lspconfig.intelephense.setup {
             },
         },
     },
+}
+
+lspconfig.html.setup {
+  capabilities = capabilities,
 }
 
 lspconfig.tailwindcss.setup {}

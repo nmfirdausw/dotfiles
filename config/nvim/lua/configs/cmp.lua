@@ -23,7 +23,6 @@ cmp.setup({
     end,
     preselect = cmp.PreselectMode.None,
     formatting = {
-        fields = { "kind", "abbr", "menu" },
         format = lspkind_installed and lspkind.cmp_format(nik.lspkind) or nil,
     },
     snippet = {

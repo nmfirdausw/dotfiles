@@ -13,6 +13,7 @@ transparent.setup({
         "NeoTreeTabInactive",
         "FloatTitle",
         "FloatBorder",
+        "NormalFloat",
     },
     exclude = {},
 })
