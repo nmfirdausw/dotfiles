@@ -1,0 +1,11 @@
+add_newline = false
+
+[character]
+success_symbol = '[](green)'
+error_symbol = '[](red)'
+
+[lua]
+format = 'via [ $version](bold blue) '
+
+[php]
+format = 'via [ $version](bold blue) '
