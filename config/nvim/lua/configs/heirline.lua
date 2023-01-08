@@ -376,8 +376,8 @@ local terminal_status_line = {
     condition = function()
         return conditions.buffer_matches({ buftype = { "terminal" } })
     end,
-    vimode, space, file_type, space, terminal_name, vimode, align,
-    vimode, space, ruler, space, scroll_bar,space, vimode
+    vimode, space, file_type, space, terminal_name, align,
+    ruler, space, scroll_bar,space, vimode
 }
 
 local default_statusline = {

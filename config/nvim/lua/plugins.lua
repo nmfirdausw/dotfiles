@@ -59,8 +59,6 @@ return {
         config = function() require "configs.lsp-signature" end,
     },
 
-
-
     ["https://git.sr.ht/~whynothugo/lsp_lines.nvim"] = {
         config = function() require "configs.lsp-lines" end,
     },
@@ -181,4 +179,7 @@ return {
         config = function() require "configs.transparent" end,
     },
 
+    ["ggandor/leap.nvim"] = {
+        config = function() require "configs.leap" end,
+    },
 }

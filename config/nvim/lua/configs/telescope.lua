@@ -22,7 +22,7 @@ telescope.setup({
             height = 0.80,
             preview_cutoff = 120,
         },
-
+borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         mappings = {
         i = {
             ["<C-n>"] = actions.cycle_history_next,

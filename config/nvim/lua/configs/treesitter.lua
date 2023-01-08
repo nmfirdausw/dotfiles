@@ -4,7 +4,7 @@ if not treesitter_installed then return end
 treesitter.setup({
     highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = { 'php' },
     },
     context_commentstring = {
         enable = true,
@@ -18,5 +18,5 @@ treesitter.setup({
     },
     autotag = { enable = true },
     incremental_selection = { enable = true },
-    indent = { enable = true },
+    indent = { enable = false },
 })
