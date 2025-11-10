@@ -4,6 +4,14 @@
       "rev": "b5077407",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
+    },
+    "nvim-ufo": {
+      "rev": "72d54c3",
+      "src": "https://github.com/kevinhwang91/nvim-ufo"
+    },
+    "promise-async": {
+      "rev": "119e896",
+      "src": "https://github.com/kevinhwang91/promise-async"
     }
   }
 }
