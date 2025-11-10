@@ -8,9 +8,11 @@ vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste after cursor (system cli
 vim.keymap.set("n", "<leader>P", '"+P', { desc = "Paste before cursor (system clipboard)" })
 vim.keymap.set("v", "<leader>p", '"+p', { desc = "Paste (system clipboard)" })
 
--- Keep cursor centered when scrolling half-page up/down
+-- Scrolling keymap
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set('n', '<PageDown>', '<C-d>zz', { desc = 'Scroll half screen down (PageDown)', silent = true })
+vim.keymap.set('n', '<PageUp>', '<C-u>zz', { desc = 'Scroll half screen up (PageUp)', silent = true })
 
 -- Keep visual selection active after indenting
 vim.keymap.set("v", "<", "<gv")
