@@ -1,7 +1,6 @@
 -- List of parsers to automatically install
 local parsers = {
   "lua",
-  "kanata",
 }
 
 -- Toggle syntax highlighting for the current buffer
