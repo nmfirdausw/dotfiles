@@ -1,5 +1,6 @@
 -- Global configuration
 vim.g.mapleader = " "
+vim.g.border = "rounded"
 
 -- Indentation and formatting
 vim.opt.expandtab = true
