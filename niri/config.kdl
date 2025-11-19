@@ -3,7 +3,7 @@ prefer-no-csd
 input {
     keyboard {
         repeat-delay 250
-        repeat-rate 30
+        repeat-rate 40
     }
 
     touchpad {
@@ -51,17 +51,16 @@ layout {
     default-column-width {}
 
     focus-ring {
-        off
-        width 4
-        active-color "#7fc8ff"
+        width 1
+        active-color "#707070"
         inactive-color "#ffffff"
         urgent-color "#9b0000"
     }
 
     border {
         width 1
-        active-color "#808080"
-        inactive-color "#505050"
+        active-color "#909090"
+        inactive-color "#606060"
         urgent-color "#9b0000"
     }
 
@@ -79,6 +78,11 @@ layout {
         top 16
         bottom 16
     }
+}
+
+overview {
+    zoom 0.60
+    backdrop-color "#000000"
 }
 
 animations {
