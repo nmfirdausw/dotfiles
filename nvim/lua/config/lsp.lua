@@ -2,7 +2,9 @@ local M = {}
 
 -- Servers to enable
 -- Make sure to configure them in lsp folder
-M.enable = {}
+M.enable = {
+  "lua_ls", -- paru -S copilot-language-server
+}
 
 -- Default config
 M.config = {
