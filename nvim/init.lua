@@ -1,6 +1,7 @@
 require("config.options")
 require("config.keymaps")
 require("config.indent")
+require("config.lsp").setup()
 require("plugins")
 require("config.statuscolumn")
 require("config.autocmds")
