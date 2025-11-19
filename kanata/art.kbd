@@ -1,4 +1,7 @@
-(defcfg)
+(defcfg
+    process-unmapped-keys yes
+    concurrent-tap-hold true
+)
 
 (defsrc
     q    w    e    r    t     y    u    i    o    p
@@ -8,28 +11,77 @@
 )
 
 (deflayer canary
-    w    l    y    p    b      z    f    o    u    '
-    c    r    s    t    g      m    n    e    i    a
-    q    j    v    d    k      x    h    /    ,    .
-                     lalt @spc ralt
+    w    l    y    p    b     z    f    o    u    '
+   @c   @r   @s   @t    g     m    @n   @e   @i   @a
+    q    j    v    d    k     x    h    /    ,    .
+                      @es @sc @rn
 )
 
 (deflayer qwerty
-    q    w    e    r    t      y    u    i    o    p
-    a    s    d    f    g      h    j    k    l    ;
- lsft    z    x    c    v      n    m    ,    .    /
-                     lalt @spc ralt 
+    q    w    e    r    t     y    u    i    o    p
+    a    s    d    f    g     h    j    k    l    ;
+ lsft    z    x    c    v     n    m    ,    .    /
+                      alt spc alt 
 )
 
+(deflayer symbol
+;;  `    (    )    ^    |     &    $    {    }    "
+;;  !    @    #    *    \     b    +    -    w    ;
+;;  ~              =    %     :    _    ?    <    >
+    `  S-9  S-0  S-6  S-\     S-7  S-4  S-[  S-]  S-'
+  S-1  S-2  S-3  S-8    \     b    S-=  -    w    ;
+  S-`    _    _    =  S-5     S-;  S--  S-/  S-,  S-.
+                        _ @sc _
+)
+
+(deflayer number
+    1    2    3    4    5     6    7    8    9    0
+ lctl lmet lsft lalt  S-8     lft  @alt @sft @met @ctl
+    _    _    _  S-4  S-5     =    -    _    _    _
+                        _ @sc _
+)
 
 (deflayer control
-    _  esc    _ pgup home      end  pgdn _    bspc _
- lctl lmet lsft lalt    _      lft  down up   rght ret
-    _    _    _    _    _      _    _    _    _    _
-                     lalt @spc ralt
+    _    _    _ home    _     _    end  [    ]    _
+  @ec lmet lsft lalt    _     lft  down up   rght ret
+    _    _    _    _    _     _    pgdn pgup _    _
+                        _ @sc _
+)
+
+(defvar
+  canary-left-hand-keys (
+    w l y p b
+    c r s t g
+    q j v d k
+  )
+  canary-right-hand-keys (
+    z f o u ;
+    m n e i a
+    x h / , .
+  )
+)
+
+(defchordsv2
+  (s d) tab 50 all-released ()
+  (k l) bspc 50 all-released ()
 )
 
 (defalias
-    spc (tap-hold-press-timeout 200 9999 spc (layer-while-held control) spc)
+    sc (tap-hold-press-timeout 200 9999 spc (layer-while-held control) spc)
+    es (tap-hold-press-timeout 200 9999 esc (layer-while-held symbol) esc)
+    rn (tap-hold-press-timeout 200 9999 ret (layer-while-held number) ret)
+    c (tap-hold-release-keys 200 200 c lctl $canary-left-hand-keys)
+    r (tap-hold-release-keys 200 200 r lmet $canary-left-hand-keys)
+    s (tap-hold-release-keys 200 200 s lsft $canary-left-hand-keys)
+    t (tap-hold-release-keys 200 200 t lalt $canary-left-hand-keys)
+    n (tap-hold-release-keys 200 200 n ralt $canary-right-hand-keys)
+    e (tap-hold-release-keys 200 200 e rsft $canary-right-hand-keys)
+    i (tap-hold-release-keys 200 200 i rmet $canary-right-hand-keys)
+    a (tap-hold-release-keys 200 200 a rctl $canary-right-hand-keys)
+    alt (tap-hold-release-keys 200 200 down ralt $canary-right-hand-keys)
+    sft (tap-hold-release-keys 200 200 up rsft $canary-right-hand-keys)
+    met (tap-hold-release-keys 200 200 rght rmet $canary-right-hand-keys)
+    ctl (tap-hold-release-keys 200 200 ret rctl $canary-right-hand-keys)
+    ec (tap-hold-release-keys 200 200 esc lctl $canary-right-hand-keys)
 )
 
