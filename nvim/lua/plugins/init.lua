@@ -1,4 +1,5 @@
 vim.pack.add({
+  "https://github.com/folke/which-key.nvim",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/kevinhwang91/nvim-ufo",
@@ -6,7 +7,9 @@ vim.pack.add({
   "https://github.com/lewis6991/gitsigns.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/nvim-mini/mini.ai",
-  { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("1") },
+  { src = "https://github.com/saghen/blink.cmp", version = "main" },
+  { src = "https://github.com/saghen/blink.pairs", version = "main" },
+  "https://github.com/rachartier/tiny-inline-diagnostic.nvim",
 }, {
   confirm = false,
   load = function(plugin)
