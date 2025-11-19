@@ -8,6 +8,10 @@
       "rev": "cdafc32",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "mini.ai": {
+      "rev": "0d3c9cf",
+      "src": "https://github.com/nvim-mini/mini.ai"
+    },
     "nvim-treesitter": {
       "rev": "b5077407",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
