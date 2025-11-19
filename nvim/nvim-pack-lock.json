@@ -2,8 +2,17 @@
   "plugins": {
     "blink.cmp": {
       "rev": "b19413d",
-      "src": "https://github.com/Saghen/blink.cmp",
-      "version": "1.0.0 - 2.0.0"
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'main'"
+    },
+    "blink.download": {
+      "rev": "86361b9",
+      "src": "https://github.com/saghen/blink.download"
+    },
+    "blink.pairs": {
+      "rev": "8e935d0",
+      "src": "https://github.com/saghen/blink.pairs",
+      "version": "'main'"
     },
     "conform.nvim": {
       "rev": "1bf8b5b",
@@ -33,6 +42,14 @@
     "promise-async": {
       "rev": "119e896",
       "src": "https://github.com/kevinhwang91/promise-async"
+    },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "71f9986",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
+    "which-key.nvim": {
+      "rev": "3aab214",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }
