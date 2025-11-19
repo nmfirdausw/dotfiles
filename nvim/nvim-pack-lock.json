@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "blink.cmp": {
+      "rev": "b19413d",
+      "src": "https://github.com/Saghen/blink.cmp",
+      "version": "1.0.0 - 2.0.0"
+    },
     "conform.nvim": {
       "rev": "1bf8b5b",
       "src": "https://github.com/stevearc/conform.nvim"
@@ -13,13 +18,17 @@
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "nvim-treesitter": {
-      "rev": "b5077407",
+      "rev": "bb83a676",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
     "nvim-ufo": {
       "rev": "72d54c3",
       "src": "https://github.com/kevinhwang91/nvim-ufo"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "promise-async": {
       "rev": "119e896",
