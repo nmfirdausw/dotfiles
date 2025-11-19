@@ -3,6 +3,7 @@ vim.pack.add({
   "https://github.com/kevinhwang91/nvim-ufo",
   "https://github.com/kevinhwang91/promise-async",
   "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/stevearc/conform.nvim",
 }, {
   confirm = false,
   load = function(plugin)
