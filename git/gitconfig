@@ -1,3 +1,13 @@
 [user]
     name = nmfirdausw
     email = nmfirdausw@gmail.com
+    signingkey = ~/.ssh/nmfirdausw.pub
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgsign = true
