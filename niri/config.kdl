@@ -87,6 +87,39 @@ overview {
     backdrop-color "#000000"
 }
 
+animations {
+    window-open {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    window-close {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    window-resize {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    window-movement {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    workspace-switch {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    overview-open-close {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    exit-confirmation-open-close {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+    screenshot-ui-open {
+        spring damping-ratio=0.8 stiffness=1250 epsilon=1e-5
+    }
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -117,17 +150,6 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
-
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://yalter.github.io/niri/Configuration:-Animations
-animations {
-    // Uncomment to turn off all animations.
-    // off
-
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
-}
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
