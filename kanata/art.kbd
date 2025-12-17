@@ -3,11 +3,6 @@
     concurrent-tap-hold true
 )
 
-(defchordsv2
-  (s d) tab 50 all-released ()
-  (k l) bspc 50 all-released ()
-)
-
 (defsrc
     q    w    e    r    t     y    u    i    o    p
     a    s    d    f    g     h    j    k    l    ;
@@ -15,9 +10,38 @@
                      lalt spc ralt 
 )
 
+(defchordsv2
+  (s d) tab 50 all-released ()
+  (k l) bspc 50 all-released ()
+)
+
+(defvar
+  canary-left-hand-keys (
+    w l y p b
+    c r s t g
+    q j v d k
+  )
+  canary-right-hand-keys (
+    z f o u ;
+    m n e i a
+    x h / , .
+  )
+)
+
+(defalias
+    c (tap-hold-release-keys 200 200 c lctl $canary-left-hand-keys)
+    r (tap-hold-release-keys 200 200 r lmet $canary-left-hand-keys)
+    s (tap-hold-release-keys 200 200 s lsft $canary-left-hand-keys)
+    t (tap-hold-release-keys 200 200 t lalt $canary-left-hand-keys)
+    n (tap-hold-release-keys 200 200 n ralt $canary-right-hand-keys)
+    e (tap-hold-release-keys 200 200 e rsft $canary-right-hand-keys)
+    i (tap-hold-release-keys 200 200 i rmet $canary-right-hand-keys)
+    a (tap-hold-release-keys 200 200 a rctl $canary-right-hand-keys)
+)
+
 (deflayer canary
     w    l    y    p    b     z    f    o    u    '
-    c    r    s    t    g     m    n    e    i    a
+   @c   @r   @s   @t    g     m    @n   @e   @i   @a
     q    j    v    d    k     x    h    /    ,    .
                       alt spc alt
 )
