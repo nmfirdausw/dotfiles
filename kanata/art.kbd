@@ -31,6 +31,8 @@
 (defalias
     sc (tap-hold-press-timeout 200 9999 spc (layer-while-held control) spc)
     ec (tap-hold-release-keys 200 200 esc lctl $canary-right-hand-keys)
+    es (tap-hold-press-timeout 200 9999 esc (layer-while-held symbol) esc)
+    rs (tap-hold-press-timeout 200 9999 ret (layer-while-held symbol) esc)
     c (tap-hold-release-keys 200 200 c lctl $canary-left-hand-keys)
     r (tap-hold-release-keys 200 200 r lmet $canary-left-hand-keys)
     s (tap-hold-release-keys 200 200 s lsft $canary-left-hand-keys)
@@ -39,13 +41,25 @@
     e (tap-hold-release-keys 200 200 e rsft $canary-right-hand-keys)
     i (tap-hold-release-keys 200 200 i rmet $canary-right-hand-keys)
     a (tap-hold-release-keys 200 200 a rctl $canary-right-hand-keys)
+    S1 (tap-hold-release-keys 200 200 S-1 lctl $canary-left-hand-keys)
+    S2 (tap-hold-release-keys 200 200 S-2 lmet $canary-left-hand-keys)
+    S3 (tap-hold-release-keys 200 200 S-3 lsft $canary-left-hand-keys)
+    S= (tap-hold-release-keys 200 200 S-= lalt $canary-left-hand-keys)
+    - (tap-hold-release-keys 200 200 - ralt $canary-right-hand-keys)
+    S- (tap-hold-release-keys 200 200 S-- rsft $canary-right-hand-keys)
+    S' (tap-hold-release-keys 200 200 S-' rmet $canary-right-hand-keys)
+    ; (tap-hold-release-keys 200 200 ; rctl $canary-right-hand-keys)
+    alt (tap-hold-release-keys 200 200 down ralt $canary-right-hand-keys)
+    sft (tap-hold-release-keys 200 200 up rsft $canary-right-hand-keys)
+    met (tap-hold-release-keys 200 200 rght rmet $canary-right-hand-keys)
+    ctl (tap-hold-release-keys 200 200 ret rctl $canary-right-hand-keys)
 )
 
 (deflayer canary
     w    l    y    p    b     z    f    o    u    '
    @c   @r   @s   @t    g     m    @n   @e   @i   @a
     q    j    v    d    k     x    h    /    ,    .
-                      alt @sc alt
+                      @es @sc @rs
 )
 
 (deflayer qwerty
@@ -59,5 +73,16 @@
   S-6  S-9  S-0  S-4    _     _    [    S-[  S-]  ]
   @ec lmet lsft lalt    _     lft  down up   rght ret
     _    _    _    _    _     home pgdn pgup end  _
+                        _ @sc _
+)
+
+(deflayer symbol
+;;  1    2    3    4    5     6    7    8    9    0
+;;  !    @    #    +    |     &    -    _    "    ;
+;;  `    ~    *    %    \     :    =    ?    <    >
+
+    1    2    3    4    5     6    7    8    9    0
+  @S1  @S2  @S3  @S=    \     S-7  @-   @S-  @S'  @;
+  S-`    _  S-8  S-5    _     S-;  =    S-/  S-,  S-.
                         _ @sc _
 )
