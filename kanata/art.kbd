@@ -1,0 +1,18 @@
+(defcfg
+    process-unmapped-keys yes
+    concurrent-tap-hold true
+)
+
+(defsrc
+    q    w    e    r    t     y    u    i    o    p
+    a    s    d    f    g     h    j    k    l    ;
+ lsft    z    x    c    v     n    m    ,    .    /
+                     lalt spc ralt 
+)
+
+(deflayer qwerty
+    q    w    e    r    t     y    u    i    o    p
+    a    s    d    f    g     h    j    k    l    ;
+ lsft    z    x    c    v     n    m    ,    .    /
+                      alt spc alt 
+)
