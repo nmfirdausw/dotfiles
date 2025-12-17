@@ -29,6 +29,8 @@
 )
 
 (defalias
+    sc (tap-hold-press-timeout 200 9999 spc (layer-while-held control) spc)
+    ec (tap-hold-release-keys 200 200 esc lctl $canary-right-hand-keys)
     c (tap-hold-release-keys 200 200 c lctl $canary-left-hand-keys)
     r (tap-hold-release-keys 200 200 r lmet $canary-left-hand-keys)
     s (tap-hold-release-keys 200 200 s lsft $canary-left-hand-keys)
@@ -43,7 +45,7 @@
     w    l    y    p    b     z    f    o    u    '
    @c   @r   @s   @t    g     m    @n   @e   @i   @a
     q    j    v    d    k     x    h    /    ,    .
-                      alt spc alt
+                      alt @sc alt
 )
 
 (deflayer qwerty
@@ -51,4 +53,11 @@
     a    s    d    f    g     h    j    k    l    ;
  lsft    z    x    c    v     n    m    ,    .    /
                       alt spc alt 
+)
+
+(deflayer control
+  S-6  S-9  S-0  S-4    _     _    [    S-[  S-]  ]
+  @ec lmet lsft lalt    _     lft  down up   rght ret
+    _    _    _    _    _     home pgdn pgup end  _
+                        _ @sc _
 )
