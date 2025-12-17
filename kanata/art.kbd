@@ -3,6 +3,11 @@
     concurrent-tap-hold true
 )
 
+(defchordsv2
+  (s d) tab 50 all-released ()
+  (k l) bspc 50 all-released ()
+)
+
 (defsrc
     q    w    e    r    t     y    u    i    o    p
     a    s    d    f    g     h    j    k    l    ;
