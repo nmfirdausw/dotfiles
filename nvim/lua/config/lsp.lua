@@ -24,5 +24,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         { desc = "LSP: switch inline completion", buffer = bufnr }
       )
     end
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
+      vim.lsp.codelens.refresh()
+    end
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+      vim.lsp.inlay_hint.enable(true)
+    end
   end,
 })
