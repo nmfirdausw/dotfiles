@@ -7,6 +7,10 @@
     "flatten.nvim": {
       "rev": "72527798e75b5e34757491947c2cb853ce21dc0e",
       "src": "https://github.com/willothy/flatten.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
+      "src": "https://github.com/folke/snacks.nvim"
     }
   }
 }
