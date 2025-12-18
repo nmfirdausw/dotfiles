@@ -12,6 +12,7 @@ vim.opt.confirm = true
 vim.opt.laststatus = 3
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.wrap = false
 
 vim.opt.backup = false
 vim.opt.history = 1000
