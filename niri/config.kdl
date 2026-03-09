@@ -139,7 +139,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+T hotkey-overlay-title="Open a Text Editor: neovide" { spawn "neovide"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: neovide" { spawn-sh "neovide +terminal +startinsert"; }
     Alt+Space hotkey-overlay-title="Open a App Launcher: fuzzel" { spawn "fuzzel"; }
     Mod+B hotkey-overlay-title="Open a Browser: chromium" { spawn "chromium"; }
 
