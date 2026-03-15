@@ -11,8 +11,10 @@
 )
 
 (defchordsv2
+  (w e) esc 50 all-released ()
   (s d) tab 50 all-released ()
-  (k l) bspc 50 all-released ()
+  (i o) bspc 50 all-released ()
+  (k l) ret 50 all-released ()
 )
 
 (defvar
