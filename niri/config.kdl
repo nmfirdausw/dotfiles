@@ -69,7 +69,7 @@ layout {
         width 2
         // active-color "#ba987e"
         active-color "#3a3f3a"
-        inactive-color "#222222"
+        inactive-color "#222422"
         urgent-color "#9b0000"
     }
 
