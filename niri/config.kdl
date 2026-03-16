@@ -35,9 +35,9 @@ output "HDMI-A-1" {
 
 
 layout {
-    background-color "#000000"
+    background-color "#161816"
 
-    gaps 24
+    gaps 16
 
     center-focused-column "never"
 
@@ -59,22 +59,22 @@ layout {
 
     focus-ring {
         off
-        width 1
-        active-color "#707070"
+        width 2
+        active-color "#424942"
         inactive-color "#ffffff"
         urgent-color "#9b0000"
     }
 
     border {
-        width 1
+        width 2
         // active-color "#ba987e"
-        active-gradient from="#dcdccf" to="#ba987e" angle=45
-        inactive-color "#414342"
+        active-color "#3a3f3a"
+        inactive-color "#222222"
         urgent-color "#9b0000"
     }
 
     shadow {
-        on
+        off
         softness 30
         spread 5
         offset x=0 y=5
@@ -91,7 +91,10 @@ layout {
 
 overview {
     zoom 0.60
-    backdrop-color "#000000"
+    backdrop-color "#161816"
+    workspace-shadow {
+        off
+    }
 }
 
 animations {
@@ -128,7 +131,7 @@ animations {
 }
 
 window-rule {
-    geometry-corner-radius 8
+    geometry-corner-radius 0
     clip-to-geometry true
 }
 
