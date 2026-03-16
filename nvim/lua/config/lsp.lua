@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
-      vim.lsp.codelens.refresh()
+      vim.lsp.codelens.enable(true)
     end
 
     if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
