@@ -16,9 +16,11 @@ PanelWindow {
   property int batteryPct: 0
   property bool batteryCharging: false
   property int volumePct: 0
+  property bool volumeMuted: false
   property int brightnessPct: 0
 
-  function volumeIcon(pct) {
+  function volumeIcon(pct, muted) {
+    if (muted) return "󰝟"
     if (pct == 0) return "󰝟"
     if (pct < 33)  return "󰕿"
     if (pct < 66)  return "󰖀"
@@ -179,12 +181,14 @@ PanelWindow {
 
   Process {
     id: volumeProcess
-    command: ["sh", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{printf \"%d\", $2 * 100}'"]
+    command: ["sh", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@"]
     running: true
     stdout: SplitParser {
       onRead: data => {
-        volumePct = parseInt(data.trim())
-        volumeLabel.text = volumeIcon(volumePct) + " " + data.trim() + "%"
+        var str = data.trim()
+        volumeMuted = str.indexOf("[MUTED]") !== -1
+        volumePct = Math.round(parseFloat(str.split(" ")[1]) * 100)
+        volumeLabel.text = volumeIcon(volumePct, volumeMuted) + " " + volumePct + "%"
       }
     }
   }
