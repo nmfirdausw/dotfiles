@@ -14,6 +14,7 @@ PanelWindow {
   color: "#161816"
 
   property int batteryPct: 0
+  property bool batteryCharging: false
   property int volumePct: 0
   property int brightnessPct: 0
 
@@ -24,7 +25,20 @@ PanelWindow {
     return "󰕾"
   }
 
-  function batteryIcon(pct) {
+  function batteryIcon(pct, charging) {
+    if (charging) {
+      if (pct >= 100) return "󰂅"
+      if (pct >= 90)  return "󰂋"
+      if (pct >= 80)  return "󰂊"
+      if (pct >= 70)  return "󰢞"
+      if (pct >= 60)  return "󰂉"
+      if (pct >= 50)  return "󰢝"
+      if (pct >= 40)  return "󰂈"
+      if (pct >= 30)  return "󰂇"
+      if (pct >= 20)  return "󰂆"
+      if (pct >= 10)  return "󰢜"
+      return "󰢟"
+    }
     if (pct >= 100) return "󰁹"
     if (pct >= 90)  return "󰂂"
     if (pct >= 80)  return "󰂁"
@@ -187,12 +201,16 @@ PanelWindow {
 
   Process {
     id: batteryProcess
-    command: ["sh", "-c", "upower -i $(upower -e | grep BAT) | grep percentage | awk '{print $2}'"]
+    command: ["sh", "-c", "upower -i $(upower -e | grep BAT) | awk '/state/{s=$2} /percentage/{p=$2} END{print s, p}'"]
     running: true
     stdout: SplitParser {
       onRead: data => {
-        batteryPct = parseInt(data.trim())
-        batteryLabel.text = batteryIcon(batteryPct) + " " + data.trim()
+        var parts = data.trim().split(" ")
+        var state = parts[0]
+        var pctStr = parts[1] || "0%"
+        batteryCharging = (state === "charging" || state === "fully-charged")
+        batteryPct = parseInt(pctStr)
+        batteryLabel.text = batteryIcon(batteryPct, batteryCharging) + " " + pctStr
       }
     }
   }
