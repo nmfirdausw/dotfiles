@@ -367,7 +367,7 @@ PanelWindow {
       model: workspaceModel
       delegate: Rectangle {
         color: "transparent"
-        border.color: model.focused ? "#3a3f3a" : "#222222"
+        border.color: model.focused ? "#3a3f3a" : "#222422"
         border.width: 2
         height: widgetHeight
         width: widgetHeight
