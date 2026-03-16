@@ -1,7 +1,5 @@
 vim.pack.add({
   "https://github.com/willothy/flatten.nvim",
-  "https://github.com/stevearc/conform.nvim",
-  "https://github.com/folke/snacks.nvim",
 }, {
   confirm = false,
   load = function(plugin)
@@ -12,7 +10,7 @@ vim.pack.add({
       name = name:gsub("%.[Ll][Uu][Aa]$", "")
       name = name:lower()
       name = name:gsub("%.", "-")
-      require("plugins." .. name)
+      pcall(require, "plugins." .. name)
     end
   end,
 })
