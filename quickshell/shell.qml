@@ -397,7 +397,7 @@ PanelWindow {
     Text {
       id: label
       anchors.centerIn: parent
-      text: Qt.formatDateTime(new Date(), "dd HH:mm")
+      text: "󰔠 " + Qt.formatDateTime(new Date(), "dd HH:mm")
       color: "#3a3f3a"
       font.pixelSize: 18
     }
@@ -406,7 +406,7 @@ PanelWindow {
       interval: 1000
       running: true
       repeat: true
-      onTriggered: label.text = Qt.formatDateTime(new Date(), "dd HH:mm")
+      onTriggered: label.text = "󰔠 " + Qt.formatDateTime(new Date(), "dd HH:mm")
     }
   }
 }
