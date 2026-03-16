@@ -1,5 +1,6 @@
 vim.pack.add({
   "https://github.com/willothy/flatten.nvim",
+  "https://github.com/stevearc/conform.nvim",
 }, {
   confirm = false,
   load = function(plugin)
