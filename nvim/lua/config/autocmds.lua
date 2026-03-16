@@ -1,8 +1,6 @@
-vim.api.nvim_create_autocmd({ "WinLeave", "WinEnter" }, {
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "term://*",
   callback = function()
-    if vim.bo.buftype ~= "" then
-      return
-    end
-    MainWin = vim.api.nvim_get_current_win()
+    vim.cmd("startinsert")
   end,
 })
