@@ -1,7 +1,11 @@
-_G.MainWin = vim.api.nvim_get_current_win()
+vim.cmd([[
+  cabbrev <expr> q getcmdtype() == ':' && getcmdline() == 'q' ? 'bd' : 'q'
+]])
 
 require("config.options")
-require("config.diagnostic")
-require("config.lsp")
-require("config.autocmds")
 require("plugins")
+require("config.keymaps")
+require("config.lsp")
+require("config.diagnostic")
+require("config.colors")
+require("config.autocmds")
