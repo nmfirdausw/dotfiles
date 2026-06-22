@@ -1,16 +1,20 @@
 {
   "plugins": {
-    "conform.nvim": {
-      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
-      "src": "https://github.com/stevearc/conform.nvim"
+    "blink.cmp": {
+      "rev": "2c36633f51d23a33cf9336ba1a91dc877bad5b23",
+      "src": "https://github.com/saghen/blink.cmp"
+    },
+    "blink.lib": {
+      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "src": "https://github.com/saghen/blink.lib"
     },
     "flatten.nvim": {
-      "rev": "72527798e75b5e34757491947c2cb853ce21dc0e",
+      "rev": "d92ca41e9c330f45c1b854a80c89c8488a9d730c",
       "src": "https://github.com/willothy/flatten.nvim"
     },
-    "snacks.nvim": {
-      "rev": "a049339328e2599ad6e85a69fa034ac501e921b2",
-      "src": "https://github.com/folke/snacks.nvim"
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }
