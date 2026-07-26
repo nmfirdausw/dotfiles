@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "blink.cmp": {
+      "rev": "1e4a8fb9708bbaa35addaa198638feed622d56ae",
+      "src": "https://github.com/saghen/blink.cmp"
+    },
+    "blink.lib": {
+      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "src": "https://github.com/saghen/blink.lib"
+    },
     "flatten.nvim": {
       "rev": "d92ca41e9c330f45c1b854a80c89c8488a9d730c",
       "src": "https://github.com/willothy/flatten.nvim"
