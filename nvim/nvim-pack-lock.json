@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "flatten.nvim": {
+      "rev": "d92ca41e9c330f45c1b854a80c89c8488a9d730c",
+      "src": "https://github.com/willothy/flatten.nvim"
+    }
+  }
+}
