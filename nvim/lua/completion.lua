@@ -10,11 +10,22 @@ blink_cmp.build():pwait()
 blink_cmp.setup({
   keymap = {
     preset = "default",
+    ["<C-n>"] = { "show", "select_next", "fallback" },
+    ["<CR>"] = {
+      function(cmp)
+        if cmp.is_menu_visible() then
+          return cmp.accept()
+        end
+      end,
+      "fallback",
+    },
+    ["<C-e>"] = { "show", "select_prev", "fallback" },
   },
   completion = {
     accept = {
       auto_brackets = { enabled = true },
     },
+    menu = { auto_show = false },
     list = {
       selection = {
         preselect = true,
