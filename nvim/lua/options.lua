@@ -21,6 +21,8 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.scrolloff = 8
 
 vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
