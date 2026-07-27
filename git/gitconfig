@@ -11,3 +11,6 @@
 
 [tag]
     gpgsign = true
+
+[core]
+	editor = nvim
