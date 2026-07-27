@@ -65,6 +65,10 @@ vim.keymap.set("n", "<leader>m", "<cmd>tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "<leader>i", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
 
+-- Grep into the quickfix list
+vim.keymap.set("n", "<leader>g", ":silent grep ", { desc = "Grep" })
+vim.keymap.set("n", "<leader>G", "<cmd>silent grep <cword> | copen<CR>", { desc = "Grep word under cursor" })
+
 -- Auto center cursor after jump to next or previous search result
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result" })

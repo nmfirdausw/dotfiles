@@ -32,3 +32,6 @@ vim.opt.iskeyword:append("-")
 vim.opt.path:append("**")
 
 vim.opt.wildoptions:append("fuzzy")
+
+vim.opt.grepprg = "rg --vimgrep --smart-case"
+vim.opt.grepformat = "%f:%l:%c:%m"
