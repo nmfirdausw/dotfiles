@@ -53,6 +53,8 @@ blink_cmp.setup({
       preset = "inherit",
       ["<Down>"] = { "select_next", "fallback" },
       ["<Up>"] = { "select_prev", "fallback" },
+      ["<Tab>"] = { "show", "select_next", "fallback" },
+      ["<S-Tab>"] = { "show", "select_prev", "fallback" },
     },
     completion = {
       menu = { auto_show = false },
