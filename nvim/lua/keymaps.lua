@@ -34,6 +34,11 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent" })
 -- Join lines without moving cursor
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines"})
 
+-- Buffer
+vim.keymap.set("n", "<leader>m", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>i", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>q", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+
 -- Auto center cursor after jump to next or previous search result
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result" })
