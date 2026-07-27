@@ -13,6 +13,8 @@ blink_cmp.setup({
     ["<C-n>"] = { "show", "select_next", "fallback" },
     ["<C-e>"] = { "show", "select_prev", "fallback" },
     ["<C-p>"] = { "show", "select_prev", "fallback" },
+    ["<C-d>"] = { "show_documentation", "hide_documentation", "fallback" },
+    ["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
     ["<CR>"] = {
       function(cmp)
         if cmp.is_menu_visible() then
