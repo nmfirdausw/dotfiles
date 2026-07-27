@@ -26,3 +26,7 @@ vim.opt.cursorlineopt = "number"
 
 vim.opt.cmdheight = 0
 vim.opt.laststatus = 3
+
+vim.opt.iskeyword:append("-")
+
+vim.opt.path:append("**")
