@@ -11,6 +11,8 @@ blink_cmp.setup({
   keymap = {
     preset = "default",
     ["<C-n>"] = { "show", "select_next", "fallback" },
+    ["<C-e>"] = { "show", "select_prev", "fallback" },
+    ["<C-p>"] = { "show", "select_prev", "fallback" },
     ["<CR>"] = {
       function(cmp)
         if cmp.is_menu_visible() then
@@ -19,7 +21,6 @@ blink_cmp.setup({
       end,
       "fallback",
     },
-    ["<C-e>"] = { "show", "select_prev", "fallback" },
   },
   completion = {
     accept = {
@@ -46,13 +47,17 @@ blink_cmp.setup({
     },
   },
   cmdline = {
-    keymap = { preset = "inherit" },
+    keymap = {
+      preset = "inherit",
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<Up>"] = { "select_prev", "fallback" },
+    },
     completion = {
-      menu = { auto_show = true },
+      menu = { auto_show = false },
       list = {
         selection = {
-          preselect = false,
-          auto_insert = false,
+          preselect = true,
+          auto_insert = true,
         },
       },
     },
