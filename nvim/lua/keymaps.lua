@@ -35,9 +35,35 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent" })
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines"})
 
 -- Buffer
-vim.keymap.set("n", "<leader>m", "<cmd>bprev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>i", "<cmd>bnext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>q", "<cmd>bdelete<CR>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<leader>e", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>x", function()
+  local buf = vim.api.nvim_get_current_buf()
+  -- Switch every window showing this buffer to another one first,
+  -- so bdelete doesn't close windows or tabs
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    vim.api.nvim_win_call(win, function()
+      local alt = vim.fn.bufnr("#")
+      if alt > 0 and alt ~= buf and vim.fn.buflisted(alt) == 1 then
+        vim.cmd("buffer #")
+      else
+        vim.cmd("bprevious")
+      end
+    end)
+  end
+  -- Terminal buffers have a running job and need a forced delete
+  if vim.bo[buf].buftype == "terminal" then
+    vim.cmd("bdelete! " .. buf)
+  else
+    vim.cmd("bdelete " .. buf)
+  end
+end, { desc = "Delete buffer" })
+
+-- Tab
+vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>m", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader>i", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
 
 -- Auto center cursor after jump to next or previous search result
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
