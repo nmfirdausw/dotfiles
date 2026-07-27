@@ -7,8 +7,9 @@ vim.keymap.set("n", "<Esc>", function()
     end
   end
   vim.diagnostic.config({ virtual_text = { current_line = true } })
+  vim.cmd("cclose")
   vim.cmd("nohlsearch")
-end, { desc = "Close floating windows and clear search highlight" })
+end, { desc = "Close floats and quickfix, clear search highlight" })
 
 -- Paste over selection without losing yanked text
 vim.keymap.set("x", "p", [["_dP]], { desc = "Paste" })
@@ -68,6 +69,24 @@ vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
 -- Grep into the quickfix list
 vim.keymap.set("n", "<leader>g", ":silent grep ", { desc = "Grep" })
 vim.keymap.set("n", "<leader>G", "<cmd>silent grep <cword> | copen<CR>", { desc = "Grep word under cursor" })
+
+-- Quickfix navigation: next/prev entry while the quickfix window is open,
+-- otherwise keep the keys' default behavior
+local function qf_nav(cmd, fallback)
+  return function()
+    if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+      pcall(vim.cmd, cmd) -- pcall: no error at first/last entry
+    else
+      local keys = vim.api.nvim_replace_termcodes(fallback, true, false, true)
+      vim.api.nvim_feedkeys(keys, "n", false)
+    end
+  end
+end
+
+vim.keymap.set("n", "<C-n>", qf_nav("cnext", "<C-n>"), { desc = "Next quickfix entry" })
+vim.keymap.set("n", "<C-p>", qf_nav("cprev", "<C-p>"), { desc = "Previous quickfix entry" })
+vim.keymap.set("n", "<C-e>", qf_nav("cprev", "<C-e>"), { desc = "Previous quickfix entry" })
+vim.keymap.set("n", "<leader>c", "<cmd>copen<CR>", { desc = "Open quickfix list" })
 
 -- Auto center cursor after jump to next or previous search result
 vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
