@@ -7,12 +7,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.cmd("startinsert")
   end,
 })
-
-vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
-  pattern = "term://*",
-  callback = function()
-    vim.schedule(function()
-      vim.cmd("startinsert")
-    end)
-  end,
-})
