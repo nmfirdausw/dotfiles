@@ -1,5 +1,7 @@
 vim.g.netrw_banner = 0
 
+vim.opt.guifont = "VictorMono Nerd Font Propo:h18" -- text below applies for VimScript
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -30,6 +32,7 @@ vim.opt.laststatus = 3
 vim.opt.iskeyword:append("-")
 
 vim.opt.path:append("**")
+vim.opt.autoread = true
 
 vim.opt.wildoptions:append("fuzzy")
 
