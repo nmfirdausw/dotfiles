@@ -1,0 +1,6 @@
+srgb = true
+frame = "transparent"
+neovim-bin = "/opt/homebrew/bin/nvim"
+
+[box-drawing]
+mode = "native"
