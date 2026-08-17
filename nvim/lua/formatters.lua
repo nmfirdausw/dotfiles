@@ -5,10 +5,11 @@ local formatters = {
 for ft, config in pairs(formatters) do
   vim.api.nvim_create_autocmd("FileType", {
     pattern = ft,
-    callback = function()
+    callback = function(args)
       local bin = config.cmd:match("^(%S+)")
       if vim.fn.executable(bin) == 1 then
-        vim.bo.formatprg = config.cmd
+        vim.bo[args.buf].formatprg = config.cmd
+        vim.bo[args.buf].formatexpr = ""
       end
     end,
   })
