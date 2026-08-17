@@ -1002,6 +1002,29 @@
                         ]
                     },
                     {
+                        "description": "Ctrl bypass for home row mods (allow key repeat)",
+                        "manipulators": [
+                            {
+                                "description": "ctrl+j -> ctrl+n (repeatable, bypasses hold-mod)",
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": { "mandatory": ["control"], "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "n", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "ctrl+k -> ctrl+e (repeatable, bypasses hold-mod)",
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": { "mandatory": ["control"], "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "e", "modifiers": ["left_control"] }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Home Row Mods",
                         "manipulators": [
                             {
