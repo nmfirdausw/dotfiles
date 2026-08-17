@@ -11,6 +11,12 @@ vim.keymap.set("n", "<leader>d", function()
   vim.diagnostic.open_float()
 end, { desc = "Open diagnostic float" })
 
+vim.keymap.set("n", "<leader>D", function()
+  local win = vim.api.nvim_get_current_win()
+  vim.diagnostic.setqflist({ open = true })
+  vim.api.nvim_set_current_win(win)
+end, { desc = "Add all diagnostics to quickfix list" })
+
 vim.api.nvim_create_autocmd("CursorMoved", {
   callback = function()
     if vim.fn.mode() ~= "n" then
