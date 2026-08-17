@@ -28,9 +28,27 @@ local function fold_char(lnum)
   return "│"
 end
 
+-- Width of the number cell: digits in the buffer's last line number, min 3
+local function num_width()
+  local win = vim.g.statusline_winid
+  local buf = win and vim.api.nvim_win_get_buf(win) or vim.api.nvim_get_current_buf()
+  return math.max(3, #tostring(vim.api.nvim_buf_line_count(buf)))
+end
+
+function _G.LineNum()
+  local width = num_width()
+  if vim.v.virtnum ~= 0 then
+    return string.rep(" ", width) .. " " -- wrapped/virtual rows: keep width, no number
+  end
+  return "%" .. width .. "l"
+end
+
 function _G.SignOrFold()
   if vim.v.virtnum > 0 then
     return " " -- wrapped rows: keep width, show nothing
+  end
+  if vim.v.virtnum < 0 then
+    return "│" -- virtual lines (codelens etc.): keep the fold guide unbroken
   end
   local lnum = vim.v.lnum
   local sign = get_sign(vim.api.nvim_get_current_buf(), lnum)
@@ -44,7 +62,7 @@ end
 -- Signs are drawn by the cell above, so hide the built-in sign column
 vim.opt.signcolumn = "no"
 
-vim.opt.statuscolumn = "%3l %{%v:lua.SignOrFold()%} "
+vim.opt.statuscolumn = "%{%v:lua.LineNum()%} %{%v:lua.SignOrFold()%} "
 
 -- No status column in terminal buffers
 vim.api.nvim_create_autocmd("TermOpen", {

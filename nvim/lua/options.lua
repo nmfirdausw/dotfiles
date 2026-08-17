@@ -22,7 +22,7 @@ vim.opt.clipboard:append("unnamedplus")
 
 vim.opt.scrolloff = 8
 
-vim.opt.signcolumn = "yes"
+-- signcolumn is owned by lua/statuscolumn.lua
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 
