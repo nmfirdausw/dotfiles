@@ -1,5 +1,10 @@
--- Merged sign/fold cell: shows the line's sign (diagnostics, etc.) if one
--- exists, otherwise the fold indicator (- open fold start, + closed fold).
+-- Line numbers, with the cursor line highlight applied to the number only
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
+
+-- Highest-priority sign extmark on a line, or nil if there is none
 local function get_sign(buf, lnum)
   local marks = vim.api.nvim_buf_get_extmarks(
     buf,
@@ -18,6 +23,7 @@ local function get_sign(buf, lnum)
   return best
 end
 
+-- Fold indicator: + closed fold, - start of an open fold, │ otherwise
 local function fold_char(lnum)
   if vim.fn.foldclosed(lnum) == lnum then
     return "+"
@@ -35,20 +41,20 @@ local function num_width()
   return math.max(3, #tostring(vim.api.nvim_buf_line_count(buf)))
 end
 
+-- Number cell: blank but same width on wrapped and virtual rows
 function _G.LineNum()
   local width = num_width()
   if vim.v.virtnum ~= 0 then
-    return string.rep(" ", width) .. " " -- wrapped/virtual rows: keep width, no number
+    return string.rep(" ", width) .. " "
   end
   return "%" .. width .. "l"
 end
 
+-- Merged sign/fold cell: the line's sign if it has one, otherwise the fold
+-- indicator. Wrapped and virtual rows keep the fold guide unbroken.
 function _G.SignOrFold()
-  if vim.v.virtnum > 0 then
-    return " " -- wrapped rows: keep width, show nothing
-  end
-  if vim.v.virtnum < 0 then
-    return "│" -- virtual lines (codelens etc.): keep the fold guide unbroken
+  if vim.v.virtnum ~= 0 then
+    return "│"
   end
   local lnum = vim.v.lnum
   local sign = get_sign(vim.api.nvim_get_current_buf(), lnum)
@@ -61,12 +67,23 @@ end
 
 -- Signs are drawn by the cell above, so hide the built-in sign column
 vim.opt.signcolumn = "no"
-
 vim.opt.statuscolumn = "%{%v:lua.LineNum()%} %{%v:lua.SignOrFold()%} "
 
--- No status column in terminal buffers
+-- :terminal forces numbers off, so put the global values back
 vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("term_open", { clear = true }),
   callback = function()
-    vim.opt_local.statuscolumn = " "
+    vim.opt_local.number = vim.go.number
+    vim.opt_local.relativenumber = vim.go.relativenumber
+  end,
+})
+
+-- Absolute numbers only in quickfix and location list windows
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("qf_number", { clear = true }),
+  pattern = "qf",
+  callback = function()
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = vim.go.number
   end,
 })
