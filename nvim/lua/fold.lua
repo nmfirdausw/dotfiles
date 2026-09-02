@@ -1,4 +1,5 @@
--- Treesitter folds by default; buffers without a parser fall back to indent
+-- Treesitter folds by default; buffers without a parser fall back to indent,
+-- and upgrade to LSP folding if a capable server later attaches
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "expr"
@@ -9,18 +10,15 @@ vim.opt.fillchars:append({ fold = " " })
 
 -- Per-filetype fold overrides, applied on top of the defaults above
 local fold_overrides = {
-  php = { foldexpr = "v:lua.vim.lsp.foldexpr()" },
   gitcommit = { foldmethod = "manual", foldexpr = "0" },
 }
 
--- One autocmd for every filetype; the table above decides what happens
-local group = vim.api.nvim_create_augroup("fold_overrides", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  group = group,
+  group = vim.api.nvim_create_augroup("fold_overrides", { clear = true }),
   callback = function(args)
     local ft = vim.bo[args.buf].filetype
 
-    -- Explicit override wins
+    -- Explicit override wins; never upgraded later
     local opts = fold_overrides[ft]
     if opts then
       for k, v in pairs(opts) do
@@ -35,21 +33,25 @@ vim.api.nvim_create_autocmd("FileType", {
     if not ok then
       vim.wo[0][0].foldmethod = "indent"
       vim.wo[0][0].foldexpr = "0"
+      -- Mark this as a fallback so LspAttach may upgrade it
+      vim.b[args.buf].fold_fallback = true
     end
   end,
 })
 
--- LSP folds are set at FileType, before any server has attached, so the first
--- computation comes back empty. Recompute once a capable client is up.
+-- Indent folding is the weakest option, so swap it for LSP folds as soon as a
+-- server that supports them attaches
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_fold_refresh", { clear = true }),
+  group = vim.api.nvim_create_augroup("lsp_fold_upgrade", { clear = true }),
   callback = function(args)
-    if vim.wo.foldexpr ~= "v:lua.vim.lsp.foldexpr()" then
+    if not vim.b[args.buf].fold_fallback then
       return
     end
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client and client:supports_method("textDocument/foldingRange") then
-      vim.cmd("normal! zx") -- recompute folds now the server can answer
+      vim.wo[0][0].foldmethod = "expr"
+      vim.wo[0][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+      vim.b[args.buf].fold_fallback = nil
     end
   end,
 })
