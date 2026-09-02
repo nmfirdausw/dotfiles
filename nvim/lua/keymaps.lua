@@ -1,19 +1,6 @@
 -- Space as leader
 vim.g.mapleader = " "
 
--- Esc: close floating windows, restore current-line virtual text, close
--- quickfix, clear search highlight
-vim.keymap.set("n", "<Esc>", function()
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    if vim.api.nvim_win_get_config(win).relative ~= "" then
-      vim.api.nvim_win_close(win, false)
-    end
-  end
-  vim.diagnostic.config({ virtual_text = { current_line = true } })
-  vim.cmd("cclose")
-  vim.cmd("nohlsearch")
-end, { desc = "Close floats and quickfix, clear search highlight" })
-
 -- Paste over selection without clobbering the register
 vim.keymap.set("x", "p", [["_dP]], { desc = "Paste" })
 
@@ -35,9 +22,14 @@ vim.keymap.set("v", ">", ">gv", { desc = "Indent" })
 -- Join lines without moving the cursor
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines" })
 
--- Buffer cycling
-vim.keymap.set("n", "<leader>e", "<cmd>bprev<CR>", { desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Next buffer" })
+-- Auto center cursor after jump to next or previous search result
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result" })
+
+-- Buffer management
+vim.keymap.set("n", "<leader>bb", "<C-^>", { desc = "Toggle between 2 buffers" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprev<CR>", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "Next buffer" })
 
 -- Delete the current buffer but keep its windows open, switching them to the
 -- alternate buffer first
@@ -62,36 +54,67 @@ vim.keymap.set("n", "<leader>x", function()
 end, { desc = "Delete buffer" })
 
 -- Tab management
-vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>", { desc = "New tab" })
-vim.keymap.set("n", "<leader>m", "<cmd>tabprev<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "<leader>i", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader>q", "<cmd>tabclose<CR>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnew<CR>", { desc = "New tab" })
+vim.keymap.set("n", "<leader><Tab>p", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader><Tab>x", "<cmd>tabclose<CR>", { desc = "Close tab" })
 
--- Quickfix navigation that wraps around, falling back to the key's default
--- behaviour when the quickfix window isn't open
-local function qf_nav(cmd, fallback)
+-- Wrapping list navigation: prefers the location list when this window has one
+-- open, otherwise the quickfix list, otherwise the key's default behaviour
+local function list_nav(dir, fallback)
   return function()
-    local qf = vim.fn.getqflist({ winid = 0, idx = 0, size = 0 })
-    if qf.winid ~= 0 then
-      if qf.size == 0 then
-        return
-      end
-      if cmd == "cnext" then
-        vim.cmd(qf.idx >= qf.size and "cfirst" or "cnext")
-      else
-        vim.cmd(qf.idx <= 1 and "clast" or "cprev")
-      end
+    local kind, list
+
+    -- Location list is window-local, so check this window first
+    local loc = vim.fn.getloclist(0, { winid = 0, idx = 0, size = 0 })
+    if loc.winid ~= 0 then
+      kind, list = "l", loc
     else
+      local qf = vim.fn.getqflist({ winid = 0, idx = 0, size = 0 })
+      if qf.winid ~= 0 then
+        kind, list = "c", qf
+      end
+    end
+
+    -- Neither list is open: pass the key through untouched
+    if not kind then
       local keys = vim.api.nvim_replace_termcodes(fallback, true, false, true)
       vim.api.nvim_feedkeys(keys, "n", false)
+      return
+    end
+
+    if list.size == 0 then
+      return
+    end
+
+    -- Wrap to the other end instead of erroring at the boundary
+    if dir == "next" then
+      vim.cmd(list.idx >= list.size and kind .. "first" or kind .. "next")
+    else
+      vim.cmd(list.idx <= 1 and kind .. "last" or kind .. "prev")
     end
   end
 end
-vim.keymap.set("n", "<C-n>", qf_nav("cnext", "<C-n>"), { desc = "Next quickfix entry" })
-vim.keymap.set("n", "<C-p>", qf_nav("cprev", "<C-p>"), { desc = "Previous quickfix entry" })
-vim.keymap.set("n", "<C-e>", qf_nav("cprev", "<C-e>"), { desc = "Previous quickfix entry" })
-vim.keymap.set("n", "<leader>c", ":copen<CR>", { desc = "Open quickfix list" })
 
--- Auto center cursor after jump to next or previous search result
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result" })
+-- List navigation
+vim.keymap.set("n", "<C-n>", list_nav("next", "<C-n>"), { desc = "Next list entry" })
+vim.keymap.set("n", "<C-p>", list_nav("prev", "<C-p>"), { desc = "Previous list entry" })
+vim.keymap.set("n", "<C-e>", list_nav("prev", "<C-e>"), { desc = "Previous list entry" })
+
+-- Open the lists
+vim.keymap.set("n", "<leader>c", ":copen<CR>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "<leader>l", ":lopen<CR>", { desc = "Open location list" })
+
+-- Esc: close floating windows, restore current-line virtual text, close
+-- quickfix and location lists, clear search highlight
+vim.keymap.set("n", "<Esc>", function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_config(win).relative ~= "" then
+      vim.api.nvim_win_close(win, false)
+    end
+  end
+  vim.diagnostic.config({ virtual_text = { current_line = true } })
+  vim.cmd("cclose")
+  vim.cmd("silent! lclose")
+  vim.cmd("nohlsearch")
+end, { desc = "Close floats, quickfix and loclist, clear search highlight" })
