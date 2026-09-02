@@ -11,12 +11,13 @@ vim.diagnostic.config({
 -- Restore virtual text once the cursor moves away, but not while sitting
 -- inside the float itself
 vim.api.nvim_create_autocmd("CursorMoved", {
+  group = vim.api.nvim_create_augroup("diagnostic_virtual_text", { clear = true }),
   callback = function()
     if vim.fn.mode() ~= "n" then
       return
     end
     if vim.bo.buftype == "nofile" then
-      return -- e.g. inside a diagnostic float; keep virtual text hidden
+      return
     end
     vim.diagnostic.config({ virtual_text = { current_line = true } })
   end,

@@ -11,8 +11,10 @@ local overrides = {
 }
 
 -- Apply the overrides per buffer on FileType
+local group = vim.api.nvim_create_augroup("indent_overrides", { clear = true })
 for ft, opts in pairs(overrides) do
   vim.api.nvim_create_autocmd("FileType", {
+    group = group,
     pattern = ft,
     callback = function()
       for k, v in pairs(opts) do

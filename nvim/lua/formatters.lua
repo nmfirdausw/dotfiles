@@ -4,8 +4,10 @@ local formatters = {
 }
 
 -- Point gq at the formatter for that buffer, only if the binary exists
+local group = vim.api.nvim_create_augroup("formatprg", { clear = true })
 for ft, config in pairs(formatters) do
   vim.api.nvim_create_autocmd("FileType", {
+    group = group,
     pattern = ft,
     callback = function(args)
       -- First word of the command is the executable to check for
