@@ -2,6 +2,7 @@
 vim.lsp.enable({
   "lua_ls",
   "intelephense",
+  "laravel_lsp",
 })
 
 -- Toggle inlay hints
