@@ -28,15 +28,15 @@ blink_cmp.setup({
     accept = {
       auto_brackets = { enabled = true },
     },
-    menu = { auto_show = false },
+    menu = { auto_show = true },
     list = {
       selection = {
-        preselect = true,
-        auto_insert = true,
+        preselect = false,
+        auto_insert = false,
       },
     },
     documentation = {
-      auto_show = false,
+      auto_show = true,
       auto_show_delay_ms = 100,
     },
     ghost_text = { enabled = true },
@@ -57,11 +57,11 @@ blink_cmp.setup({
       ["<S-Tab>"] = { "show", "select_prev", "fallback" },
     },
     completion = {
-      menu = { auto_show = false },
+      menu = { auto_show = true },
       list = {
         selection = {
-          preselect = true,
-          auto_insert = true,
+          preselect = false,
+          auto_insert = false,
         },
       },
     },
